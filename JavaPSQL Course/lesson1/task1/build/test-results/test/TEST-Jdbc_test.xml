@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Jdbc_test" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-05-31T21:15:21" hostname="DESKTOP-IA5Q318" time="1.43">
+  <properties/>
+  <testcase name="testSolution" classname="Jdbc_test" time="1.43"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

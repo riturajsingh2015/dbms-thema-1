@@ -1,0 +1,111 @@
+type: output
+files:
+- name: src/CRUD_CREATE.java
+  visible: true
+  placeholders:
+  - offset: 196
+    length: 31
+    placeholder_text: Write query to drop users table
+    initial_state:
+      length: 31
+      offset: 196
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: DROP TABLE IF EXISTS users
+  - offset: 250
+    length: 33
+    placeholder_text: Write query to create users table
+    initial_state:
+      length: 33
+      offset: 250
+    initialized_from_dependency: false
+    selected: false
+    status: Unchecked
+    encrypted_possible_answer: CREATE TABLE IF NOT EXISTS users(id int, name varchar(200),password
+      varchar(200),age int)
+  text: |-
+    import java.sql.Connection;
+    import java.sql.SQLException;
+    import java.sql.Statement;
+    import java.util.logging.Level;
+    import java.util.logging.Logger;
+
+    public class CRUD_CREATE {
+       String DROP = "Write query to drop users table";
+       String CREATE = "Write query to create users table";
+
+
+       public static void main(String[] args) {
+          //Datenbankverbindungsbefehl
+          Connection con = JdbcConnection.getConnection();
+          CRUD_CREATE CRUD_ex = new CRUD_CREATE();
+          try {
+             //Erstellen Sie eine Anweisung zum Ausführen
+             // von DROP- und CREATE-Datenbankabfragen
+             Statement stmt = con.createStatement();
+             //Führen Sie DROP- und CREATE-Abfragen aus
+             stmt.executeUpdate(CRUD_ex.DROP);
+             System.out.println("Existing Table Droppped");
+             stmt.executeUpdate(CRUD_ex.CREATE);
+             System.out.print("New Table Created");
+             //jetzt machen wir die Verbindnung zu
+             con.close();
+          } //Dieser Befehl wird ausgeführt, wenn ein Fehler oder eine Ausnahme auftritt
+          catch (SQLException ex) {
+             Logger lgr = Logger.getLogger(CRUD_CREATE.class.getName());
+             lgr.log(Level.SEVERE, ex.getMessage(), ex);
+          }
+       }
+    }
+  learner_created: false
+- name: test/output.txt
+  visible: false
+  text: |-
+    Existing Table Droppped
+    New Table Created
+  learner_created: false
+- name: src/JdbcConnection.java
+  visible: true
+  text: |-
+    import java.sql.Connection;
+    import java.sql.DriverManager;
+    import java.sql.SQLException;
+    import java.util.logging.Level;
+    import java.util.logging.Logger;
+
+    public class JdbcConnection {
+        String url = "jdbc:postgresql://localhost:5432/test";
+        String user = "postgres";
+        String password = "postgresql_786";
+
+        public String getUrl() {
+            return url;
+        }
+
+        public String getUser() {
+            return user;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        private static final Logger LOGGER =
+                Logger.getLogger(JdbcConnection.class.getName());
+        private static Connection connection = null;
+
+        public static Connection getConnection() {
+            try {
+                JdbcConnection jdbc = new JdbcConnection();
+                connection = DriverManager.getConnection(jdbc.url, jdbc.user, jdbc.password);
+            } catch (SQLException ex) {
+                LOGGER.log(Level.SEVERE, null, ex);
+            }
+            return connection;
+        }
+
+    }
+  learner_created: false
+status: Unchecked
+record: -1

@@ -1,0 +1,111 @@
+type: edu
+files:
+- name: src/JdbcConnection.java
+  visible: true
+  placeholders:
+  - offset: 311
+    length: 23
+    placeholder_text: Write the JDBC URL here
+    initial_state:
+      length: 23
+      offset: 311
+    initialized_from_dependency: false
+    selected: false
+    status: Failed
+    encrypted_possible_answer: jdbc:postgresql://localhost:5432/test
+  - offset: 356
+    length: 34
+    placeholder_text: Write the postgreSQL Username here
+    initial_state:
+      length: 34
+      offset: 356
+    initialized_from_dependency: false
+    selected: false
+    status: Failed
+    encrypted_possible_answer: postgres
+  - offset: 416
+    length: 36
+    placeholder_text: Write the postgreSQL server Password
+    initial_state:
+      length: 36
+      offset: 416
+    initialized_from_dependency: false
+    selected: false
+    status: Failed
+    encrypted_possible_answer: postgresql_786
+  text: |-
+    import java.sql.Connection;
+    import java.sql.DriverManager;
+    import java.sql.SQLException;
+    import java.util.Optional;
+    import java.util.logging.Level;
+    import java.util.logging.Logger;
+
+    public class JdbcConnection {
+        // Jdbcurl STRING ERSTELLEN, UM EINE VERBINDUNG MIT DER TEST-DB ZU VERBINDEN
+        String url = "Write the JDBC URL here";
+        String user = "Write the postgreSQL Username here";
+        String password = "Write the postgreSQL server Password";
+
+        public String getUrl() {
+            return url;
+        }
+
+        public String getUser() {
+            //This is comment
+            //New Comment
+            //ich habe diese Datei geandert
+            return user;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        //Erställt einen Logger mit dem Klassennamen JdbcConnection,um Ausnamen zu protokolieren
+        private static final Logger LOGGER =
+                Logger.getLogger(JdbcConnection.class.getName());
+        private static Connection connection = null;
+        /* Deklariert in der JdbcConnection-Klasse eine statische Methode getConnection ().
+         Die Methode getConection () registriert den driver und stellt die Datenbankverbindung her,
+          indem url, user und password übergeben werden,
+          */
+        public static Connection getConnection() {
+            try {
+                JdbcConnection jdbc = new JdbcConnection();
+                connection = DriverManager.getConnection(jdbc.url, jdbc.user, jdbc.password);
+            }
+            //Im Falle einer Ausnahme protokollieren wir die Fehlermeldung
+            catch (SQLException ex) {
+                LOGGER.log(Level.SEVERE, null, ex);
+            }
+            return connection;
+        }
+
+    }
+  learner_created: false
+- name: test/Jdbc_test.java
+  visible: false
+  text: |
+    import org.junit.Test;
+    import static org.junit.Assert.*;
+
+    public class Jdbc_test {
+      JdbcConnection jdbc= new JdbcConnection();
+      @Test
+      public void testSolution() {
+
+        assertEquals("username should be","postgres", jdbc.getUser());
+        assertEquals("passoword should be","postgresql_786", jdbc.getPassword());
+        assertEquals("jdbc_URL should be","jdbc:postgresql://localhost:5432/test", jdbc.getUrl());
+        assertEquals("connection is not established",true, !JdbcConnection.getConnection().equals(null));
+       }
+    }
+  learner_created: false
+status: Failed
+feedback:
+  message: username should be
+  time: Fri, 04 Jun 2021 14:23:33 UTC
+  expected: postgres
+  actual: Write the postgreSQL Username here
+record: -1

@@ -1,0 +1,16 @@
+type: edu
+files:
+- name: src/JdbcConnection.java
+  visible: true
+  placeholders:
+  - offset: 311
+    length: 37
+    placeholder_text: Write the JDBC URL here
+  - offset: 370
+    length: 8
+    placeholder_text: Write the postgreSQL Username here
+  - offset: 404
+    length: 14
+    placeholder_text: Write the postgreSQL server Password
+- name: test/Jdbc_test.java
+  visible: false

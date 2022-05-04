@@ -1,0 +1,29 @@
+<html>
+
+<h2>Aufgabe Beschreibung- Task5</h2>
+<p>
+    <strong>Hinweis </strong>:  Dies ist eine theoretische Art von Aufgabe.Und wenn Sie das Programm ausführen möchten, müssen Sie die CRUD_READ-Datei ausführen, die die main-methode enthält.
+</p>
+<p><strong>task6 ~  In letzter Aufgabe implementieren wir zunächst die Methode getUser(id) in unserer Klasse UserDaoImpl, um einen Benutzer mit einer bestimmten ID abzurufen. Dann erstellen wir in unserer Klasse CRUD_READ, die die main() hat, um einen Benutzer abzurufen und die gewünschten Details anzuzeigen.
+
+</strong> </p>
+
+<p>
+    <strong>Theorie zur Aufgabe </strong>:
+    Diese Aufgaben befassen sich mit dem Mapping(siehe oben) einer einfachen Java-Klasse namens User mit den Attributen id, name , password & age auf eine Tabelle namens users in der Datenbank und wie CRUD-Funktionalitäten mit diesem Objekt implementiert werden können.Um CRUD-Funktionalitäten zu implementieren, haben wir das DAO-Muster verwendet.
+    Das Data Access Object Pattern oder DAO-Muster wird verwendet, um Low-Level-APIs oder Operationen für den Datenzugriff von High-Level-Geschäfts Diensten zu trennen. Im Folgenden sind die Teile des Data Access Object Pattern aufgeführt.
+<ul>
+    <li><strong>Data Access Object Interface</strong> - Diese Schnittstelle definiert die Standardoperationen, die auf einem Modellobjekt (oder mehreren) ausgeführt werden.(UserDao)
+    </li>
+    <li><strong>Konkrete Klasse Data Access Object</strong> - Diese Klasse implementiert die oben genannte Schnittstelle. Diese Klasse ist dafür verantwortlich, Daten aus einer Datenquelle zu holen, die eine Datenbank / xml oder ein anderer Speichermechanismus sein kann.(UserDaoImpl)
+    </li>
+    <li><strong>Model Object oder Value Object</strong> - Dieses Objekt ist ein einfaches POJO, das Get-/Set-Methoden enthält, um die mit der DAO-Klasse abgerufenen Daten zu speichern.(User)
+
+    </li>
+</ul>
+</p>
+<p>
+    <strong>**Wenn Sie nun die Java-Implementierung des Codes richtig verstanden haben, können Sie die UPDATE- und DELETE-Funktionalitäten als Herausforderung selbst implementieren**</strong>
+
+</p>
+</html>

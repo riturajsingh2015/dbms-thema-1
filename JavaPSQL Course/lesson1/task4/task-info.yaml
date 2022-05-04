@@ -1,0 +1,15 @@
+type: output
+files:
+- name: src/CRUD_CREATE.java
+  visible: true
+  placeholders:
+  - offset: 196
+    length: 26
+    placeholder_text: Write query to drop users table
+  - offset: 245
+    length: 89
+    placeholder_text: Write query to create users table
+- name: test/output.txt
+  visible: false
+- name: src/JdbcConnection.java
+  visible: true

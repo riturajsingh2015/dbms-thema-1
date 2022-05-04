@@ -1,0 +1,18 @@
+type: edu
+files:
+- name: test/Tests.java
+  visible: false
+- name: src/JdbcConnection.java
+  visible: true
+- name: src/JavaPostgreSqlWriteImage.java
+  visible: true
+  placeholders:
+  - offset: 226
+    length: 27
+    placeholder_text: Write the Drop query here
+  - offset: 277
+    length: 56
+    placeholder_text: Write the Create query here
+  - offset: 356
+    length: 34
+    placeholder_text: Write the Insert query here

@@ -1,0 +1,20 @@
+type: choice
+is_multiple_choice: false
+options:
+- text: die in der Aufgabe implementierte Methode ist insertUser()
+  is_correct: true
+- text: die in der Aufgabe implementierte Methode ist getUser(id)
+  is_correct: false
+message_correct: Congratulations!
+message_incorrect: Incorrect solution
+files:
+- name: src/CRUD_INSERT.java
+  visible: true
+- name: src/User.java
+  visible: true
+- name: src/UserDao.java
+  visible: true
+- name: src/UserDaoImpl.java
+  visible: true
+- name: src/JdbcConnection.java
+  visible: true

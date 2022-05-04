@@ -1,0 +1,181 @@
+type: choice
+is_multiple_choice: false
+options:
+- text: die in der Aufgabe implementierte Methode ist insertUser()
+  is_correct: true
+- text: die in der Aufgabe implementierte Methode ist getUser(id)
+  is_correct: false
+message_correct: Congratulations!
+message_incorrect: Incorrect solution
+files:
+- name: src/CRUD_INSERT.java
+  visible: true
+  text: |-
+    public class CRUD_INSERT {
+       public static void main(String[] args) {
+          // über die Schnittstelle(UserDao)  auf
+          // die konkrete Klasse(UserDaoImpl)  zugreifen.
+          UserDao userDao = new UserDaoImpl();
+          //erstellen wir vier Benutzer und fügen
+          // sie nacheinander in unsere Tabelle "users" ein.
+          User user1=new User(1,"Jagjit", "merimann",58);
+          User user2=new User(2,"Yudhvir", "meribhai",30);
+          User user3=new User(3,"SP Singh", "meripa",63);
+          User user4=new User(4,"Rajan SINGH", "mein",32);
+
+
+          if(userDao.insertUser(user2))
+             System.out.println("user2 inserted in Database");
+          if(userDao.insertUser(user3))
+             System.out.println("user3 inserted in Database");
+          if(userDao.insertUser(user4))
+             System.out.println("user4 inserted in Database");
+          if(userDao.insertUser(user1))
+             System.out.println("user1 inserted in Database");
+       }
+    }
+  learner_created: false
+- name: src/User.java
+  visible: true
+  text: |-
+    public class User {
+        //Attributes des Benutzers
+        private Integer id;
+        private String name;
+        private String pass;
+        private Integer age;
+        //Contructors und Getter und Setters
+        public User() {
+        }
+
+        public User(String name, String pass, Integer age) {
+            this.name = name;
+            this.pass = pass;
+            this.age = age;
+        }
+
+        public User(Integer id, String name, String pass, Integer age) {
+            this.id = id;
+            this.name = name;
+            this.pass = pass;
+            this.age = age;
+        }
+
+        public Integer getAge() {
+            return age;
+        }
+
+        public void setAge(Integer age) {
+            this.age = age;
+        }
+
+        public Integer getId() {
+            return id;
+        }
+
+        public void setId(Integer id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getPass() {
+            return pass;
+        }
+
+        public void setPass(String pass) {
+            this.pass = pass;
+        }
+
+    }
+  learner_created: false
+- name: src/UserDao.java
+  visible: true
+  text: |-
+    public interface UserDao {
+        boolean insertUser(User user);
+    }
+  learner_created: false
+- name: src/UserDaoImpl.java
+  visible: true
+  text: |
+    import java.sql.Connection;
+    import java.sql.PreparedStatement;
+    import java.sql.SQLException;
+
+    public class UserDaoImpl implements UserDao{
+        @Override
+        public boolean insertUser(User user) {
+            //Datenbankverbindungsbefehl
+            Connection connection = JdbcConnection.getConnection();
+            try {
+                //Die vorbereitete Anweisung verwendet die INSERT-Abfrage, um die Benutzerdetails in die Tabelle einzufügen
+                PreparedStatement ps = connection.prepareStatement("INSERT INTO users VALUES (?, ?, ?, ?)");
+                ps.setInt(1, user.getId());
+                ps.setString(2, user.getName());
+                ps.setString(3, user.getPass());
+                ps.setInt(4, user.getAge());
+                int i = ps.executeUpdate();
+    //Die Methode executeUpdate gibt die Anzahl der betroffenen Zeilen zurück,
+    // wir erwarten, dass eine einzelne Zeile eingefügt wird, d. h. es sollte 1
+    // zurückgegeben werden, wenn ja, geben wir true zurück, andernfalls geben wir false zurück
+                if(i == 1)
+                    return true;
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            return false;
+        }
+    }
+  learner_created: false
+- name: src/JdbcConnection.java
+  visible: true
+  text: |-
+    import java.sql.Connection;
+    import java.sql.DriverManager;
+    import java.sql.SQLException;
+    import java.util.logging.Level;
+    import java.util.logging.Logger;
+
+    public class JdbcConnection {
+        String url = "jdbc:postgresql://localhost:5432/test";
+        String user = "postgres";
+        String password = "postgresql_786";
+
+        public String getUrl() {
+            return url;
+        }
+
+        public String getUser() {
+            return user;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        private static final Logger LOGGER =
+                Logger.getLogger(JdbcConnection.class.getName());
+        private static Connection connection = null;
+
+        public static Connection getConnection() {
+            try {
+                JdbcConnection jdbc = new JdbcConnection();
+                connection = DriverManager.getConnection(jdbc.url, jdbc.user, jdbc.password);
+            } catch (SQLException ex) {
+                LOGGER.log(Level.SEVERE, null, ex);
+            }
+            return connection;
+        }
+
+    }
+  learner_created: false
+status: Unchecked
+record: -1
